@@ -10,7 +10,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       flats: [],
-      selectedFlat: null
+      allFlats: [],
+      selectedFlat: null,
+      search: ""
     };
   }
 
@@ -19,7 +21,10 @@ class App extends React.Component {
     fetch(url)
     .then(response => response.json())
     .then((data) => {
-      this.setState({ flats: data });
+      this.setState({
+        flats: data,
+        allFlats: data
+      });
     });
   }
 
@@ -27,6 +32,13 @@ class App extends React.Component {
     console.log(flat);
     this.setState({
       selectedFlat: flat
+    })
+  }
+
+  handleSearch = (event) => {
+    this.setState({
+      search: event.target.value,
+      flats: this.state.allFlats.filter((flat) => new RegExp(event.target.value, "i").exec(flat.name))
     })
   }
 
