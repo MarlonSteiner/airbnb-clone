@@ -47,6 +47,12 @@ class App extends React.Component {
       <div className="app">
         <div className="main">
           <div className="search">
+            <input
+            type="text"
+            placeholder="Search"
+            value={this.state.query}
+            onChange={this.handleSearch}
+            />
           </div>
           <div className="flats">
             {this.state.flats.map((flat) => {
